@@ -10,40 +10,55 @@ function initChart(canvas, width, height, dpr) {
     devicePixelRatio: dpr // new
   });
   canvas.setChart(chart);
-  var data1 = {
-    "name": "root",
+  var httpData = {
+    "name": "HTTP",
     "children": [{
-      "name": "a",
+      "name": "HTTPS",
       "children": [{
-        "name": "a1"
+        "name": "加密算法",
+        "id": "a1"
       }, {
-        "name": "a2"
+        "name": "握手过程",
+        "id": "a2"
       }, {
-        "name": "a3"
-      }, {
-        "name": "a4"
+        "name": "签名验证",
+        "id": "a3"
       }]
     }, {
-      "name": "b",
+      "name": "HTTP2",
       "children": [{
-        "name": "b1"
+        "name": "头部压缩",
+        "id": "b1"
       }, {
-        "name": "b2"
+        "name": "多路复用",
+        "id": "b2"
       }, {
-        "name": "b3"
+        "name": "设置请求优先级",
+        "id": "b3"
       }, {
-        "name": "b4"
+        "name": "服务端推送",
+        "id": "b4"
       }]
     }, {
-      "name": "c",
+      "name": "夸域问题",
       "children": [{
-        "id": "c01",
-        "name": "c1"
+        "name": "夸域原因",
+        "id": "c1"
+      }, {
+        "name": "解决夸域",
+        "id": "c2"
       }]
     }, {
-      "name": "d",
+      "name": "HTTP缓存",
       "children": [{
-        "name": "d1"
+        "name": "强缓存",
+        "id": "d1"
+      }, {
+        "name": "协商缓存",
+        "id": "d2"
+      }, {
+        "name": "代理缓存",
+        "id": "d3"
       }]
     }]
   };
@@ -51,31 +66,27 @@ function initChart(canvas, width, height, dpr) {
   var option = {
     series: [{
       type: 'tree',
-
       initialTreeDepth: -1,
-
-      name: 'tree1',
-
-      data: [data1],
-
+      name: 'httpTree',
+      data: [httpData],
       top: '5%',
       left: '20%',
       bottom: '2%',
       right: '15%',
       symbol: 'circle',
-      symbolSize: 28,
+      symbolSize: 30,
       animationDurationUpdate: 750,
       itemStyle: {
-        borderWidth: 0,
-        color: '#6E35FF'
+        color: 'transparent',
+        borderWidth: 0
       },
       label: { //标签样式
-        color: "#f00",
+        color: "#fff",
         fontSize: 12,
         position: "inside",
         rotate: 0,
-        backgroundColor: '#fff'
-
+        padding: 5,
+        backgroundColor: '#6E35FF'
       },
       lineStyle: {
         width: 1,
@@ -88,11 +99,12 @@ function initChart(canvas, width, height, dpr) {
   };
 
   chart.setOption(option);
-  chart.on('click', function (params) {
-    console.log('params', params);
-    // wx.redirectTo({
-    //   url: '/pages/leaves/leaves'
-    // })
+  chart.on('click', function(params) {
+    if (params.data.id){
+      wx.redirectTo({
+        url: '/pages/leaves/leaves?id=' + params.data.id
+      })
+    }
   });
   return chart;
 }
@@ -104,6 +116,5 @@ Page({
     }
   },
 
-  onReady() {
-  }
+  onReady() {}
 });

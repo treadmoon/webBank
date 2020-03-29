@@ -1,2 +1,7 @@
-<!--pages/leaves/leaves.wxml-->
-<text>pages/leaves/leaves.wxml</text>
+<view class="title">HTTP缓存：强缓存</view>
+<view class="contain">
+  <view class="c-title">强缓存的概念</view>
+  <view class="c-info">
+    当缓存数据库中已有所请求的数据时。客户端直接从缓存数据库中获取数据。当缓存数据库中没有所请求的数据时，客户端的才会从服务端获取数据。
+  </view>
+</view>
